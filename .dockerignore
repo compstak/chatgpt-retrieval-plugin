@@ -1,11 +1,13 @@
-# Ignore files that are already ignored by git
-.gitignore
+# Ignore everything.
+**
 
-scripts/
-tests/
-examples/
-local-server/
-*.md
-*.pyc
-.dockerignore
-Dockerfile
+# Except the following.
+!src
+!LICENSE.txt
+!pyproject.toml
+!poetry.lock
+!README.md
+
+# Filter unwanted files from included folders.
+**/__pycache__
+**.py[cod]

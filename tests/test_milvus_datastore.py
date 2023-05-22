@@ -1,7 +1,8 @@
 import pytest
 
 from chatgpt_retrieval_plugin.api.schemas.models import DocumentChunk, DocumentChunkMetadata, DocumentMetadataFilter, QueryWithEmbedding, Source
-from chatgpt_retrieval_plugin.data.milvus_datastore import OUTPUT_DIM, MilvusDataStore
+from chatgpt_retrieval_plugin.config.settings import settings
+from chatgpt_retrieval_plugin.data.milvus_datastore import MilvusDataStore
 
 
 @pytest.fixture
@@ -10,8 +11,8 @@ def milvus_datastore():
 
 
 def sample_embedding(one_element_poz: int):
-    embedding = [0] * OUTPUT_DIM
-    embedding[one_element_poz % OUTPUT_DIM] = 1
+    embedding = [0] * settings.OUTPUT_DIM
+    embedding[one_element_poz % settings.OUTPUT_DIM] = 1
     return embedding
 
 
@@ -19,8 +20,8 @@ def sample_embeddings(num: int, one_element_start: int = 0):
     # since metric type is consine, we create vector contains only one element 1, others 0
     embeddings = []
     for x in range(num):
-        embedding = [0] * OUTPUT_DIM
-        embedding[(x + one_element_start) % OUTPUT_DIM] = 1
+        embedding = [0] * settings.OUTPUT_DIM
+        embedding[(x + one_element_start) % settings.OUTPUT_DIM] = 1
         embeddings.append(embedding)
     return embeddings
 

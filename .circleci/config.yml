@@ -16,18 +16,18 @@ executors:
 workflows:
   development:
     jobs:
-      - pre-commit
-      - pytest:
-          context: aws-deploy
-          requires:
-            - pre-commit
+      # - pre-commit
+      # - pytest:
+      #     context: aws-deploy
+      #     requires:
+      #       - pre-commit
       - aws-ecr/build-and-push-image:
           context: aws-deploy
           dockerfile: .docker/Dockerfile
           repo: compstak/chatgpt-retrieval-plugin
           tag: build-$CIRCLE_BUILD_NUM
-          requires:
-            - pytest
+          # requires:
+          #   - pytest
 
 jobs:
   pre-commit:

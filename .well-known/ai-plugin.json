@@ -9,9 +9,9 @@
   },
   "api": {
     "type": "openapi",
-    "url": "https://chatgpt-plugin.stage.cs-int-592.com/.well-known/openapi.yaml"
+    "url": "https://chatgpt-retrieval-plugin.stage.cs-int-592.com/.well-known/openapi.yaml"
   },
-  "logo_url": "https://chatgpt-plugin.stage.cs-int-592.com/.well-known/logo.png",
+  "logo_url": "https://chatgpt-retrieval-plugin.stage.cs-int-592.com/.well-known/logo.png",
   "contact_email": "wayne@compstak.com",
   "legal_info_url": "https://compstak.com/legal"
 }

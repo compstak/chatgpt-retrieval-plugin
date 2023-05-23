@@ -19,13 +19,13 @@ app = FastAPI(
 app.mount("/.well-known", StaticFiles(directory=".well-known"), name="static")
 
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 app.add_middleware(PrometheusMiddleware)
 
 app.add_route("/metrics", metrics)

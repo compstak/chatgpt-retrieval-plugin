@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
-  title: Retrieval Plugin API
-  description: A retrieval API for querying and filtering documents based on natural language queries and metadata
+  title: Compstak Docs API
+  description: This API lets you search through the Compstak's documents
   version: 0.1.0
   servers:
     - url: https://chatgpt-retrieval-plugin.stage.cs-int-592.com

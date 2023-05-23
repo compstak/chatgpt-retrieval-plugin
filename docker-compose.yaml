@@ -64,8 +64,8 @@ services:
       - "standalone"
     environment:
       MILVUS_COLLECTION: chatgpt
-    env_file:
-      - .env
+      MILVUS_HOST: standalone
+      MIVLUS_PORT: 19530
     ports:
       - 8000:8000
     command:

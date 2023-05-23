@@ -1,5 +1,5 @@
 from functools import lru_cache
-from typing import Any, Optional
+from typing import Optional
 from uuid import uuid4
 
 from pydantic import BaseSettings
@@ -16,15 +16,8 @@ class Settings(BaseSettings):
     MILVUS_PASSWORD: Optional[str] = None
     MILVUS_USE_SECURITY: bool = False
 
-    MILVUS_INDEX_PARAMS: dict[str, Any] = {
-        "metric_type": "IP",
-        "index_type": "HNSW",
-        "params": {"M": 8, "efConstruction": 64},
-    }
-    MILVUS_SEARCH_PARAMS: dict[str, Any] = {
-        "metric_type": "IP",
-        "params": {"ef": 10},
-    }
+    MILVUS_INDEX_PARAMS: Optional[str] = None
+    MILVUS_SEARCH_PARAMS: Optional[str] = None
     MILVUS_CONSISTENCY_LEVEL: str = "Bounded"
 
     UPSERT_BATCH_SIZE: int = 100

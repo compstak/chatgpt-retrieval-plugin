@@ -1,4 +1,4 @@
-FROM python:3.10-slim AS python_builder
+FROM python:3.10 AS python_builder
 
 ENV POETRY_VERSION 1.3.2
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -25,7 +25,7 @@ COPY src src
 RUN poetry build && \
     pip install dist/*.whl
 
-FROM python:3.10-slim
+FROM python:3.10
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
@@ -42,9 +42,12 @@ RUN mkdir ${APP_HOME}
 
 WORKDIR ${APP_HOME}
 
+COPY wait-for-it.sh ./
+COPY .well-known .well-known
+
 COPY --from=python_builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 ENV PATH "${VIRTUAL_ENV}/bin:${PATH}"
 
 RUN chown -R user:user ${HOME}
 
-ENTRYPOINT ["chatgpt_retrieval_plugin"]
+# ENTRYPOINT ["chatgpt_retrieval_plugin"]

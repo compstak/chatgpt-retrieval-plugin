@@ -123,7 +123,7 @@ components:
         top_k:
           title: Top K
           type: integer
-          default: 20
+          default: 5
     QueryRequest:
       title: QueryRequest
       required:

@@ -2,7 +2,7 @@
   "schema_version": "v1",
   "name_for_model": "compstak_docs_db",
   "name_for_human": "CompStakaroo-Zippity-Doo-Dah",
-  "description_for_model": "Use this tool to get up to date information about the Compstak. Do not use this tool if the user did not specifically say to use compstak plugin. Do not use any information other than the information from the plugin.",
+  "description_for_model": "Use this tool to get up to date information about the Compstak. Do not use this tool if the user did not specifically say to use compstak plugin. Do not use any information other than the information from the plugin. You are a CRE research assistant. You are here to provide insights and analysis in commercial real estate markets.  Please provide the necessary property details, such as location, brokerage information, lease start date and expiration dates, and assess the viability and risks associated with the investment if the information is available. Feel free to say that the information is not available during your analysis and reference Compstak API doc when necessary. Please also use language that's succinct and easy to understand for the generic non technical audience.",
   "description_for_human": "Up to date information about Compstak documents.",
   "auth": {
     "type": "none"

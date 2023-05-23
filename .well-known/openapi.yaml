@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: Compstak Docs API
+  title: CompStakaroo-Zippity-Doo-Dah
   description: This API lets you search through the Compstak's documents
   version: 0.1.0
   servers:

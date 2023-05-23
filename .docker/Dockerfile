@@ -50,4 +50,4 @@ ENV PATH "${VIRTUAL_ENV}/bin:${PATH}"
 
 RUN chown -R user:user ${HOME}
 
-# ENTRYPOINT ["chatgpt_retrieval_plugin"]
+ENTRYPOINT ["chatgpt_retrieval_plugin", "server"]

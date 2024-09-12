@@ -1,0 +1,82 @@
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@8.2.1
+  python: circleci/python@2.1.1
+
+executors:
+  python:
+    parameters:
+      tag:
+        type: string
+        default: "3.10"
+    docker:
+      - image: cimg/python:<< parameters.tag >>
+
+workflows:
+  development:
+    jobs:
+      # - pre-commit
+      # - pytest:
+      #     context: aws-deploy
+      #     requires:
+      #       - pre-commit
+      - aws-ecr/build-and-push-image:
+          context: aws-deploy
+          dockerfile: .docker/Dockerfile
+          repo: compstak/chatgpt-retrieval-plugin
+          tag: build-$CIRCLE_BUILD_NUM
+          # requires:
+          #   - pytest
+
+jobs:
+  pre-commit:
+    executor:
+      name: python
+    steps:
+      - checkout
+      - run:
+          name: Combine precommit config and python versions for caching
+          command: |
+            cat .pre-commit-config.yaml > pre-commit-deps.txt
+            python -VV >> pre-commit-deps.txt
+      - restore_cache:
+          keys:
+            - v1-precommit-deps-{{ checksum "pre-commit-deps.txt" }}
+      - run:
+          name: Install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install --upgrade pip
+            pip install pre-commit
+            pre-commit install-hooks
+      - save_cache:
+          paths:
+            - ~/.cache/pre-commit
+            - ./venv
+          key: v1-precommit-deps-{{ checksum "pre-commit-deps.txt" }}
+      - run:
+          name: Check code style using precommit
+          command: |
+            . venv/bin/activate
+            pre-commit run --show-diff-on-failure --all-files
+  pytest:
+    executor:
+      name: python
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: poetry
+          cache-version: v2
+          args: --with=dev,type_check --sync
+      - run:
+          name: Run type checking with mypy
+          command: poetry run nox -s type_check
+      - run:
+          name: Run pytest
+          command: poetry run nox -s test
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: htmlcov
